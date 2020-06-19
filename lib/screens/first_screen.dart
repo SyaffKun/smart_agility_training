@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:smart_agility_training/bluetooth/ChoosePlayer.dart';
 import 'package:smart_agility_training/screens/welcome_screen.dart';
-import 'package:smart_agility_training/backend/sign_in.dart';
+import 'package:smart_agility_training/backend/google_sign_in.dart';
+import 'package:smart_agility_training/bluetooth/SelectBondedDevicePage.dart';
 
 class FirstScreen extends StatelessWidget {
   static const String id = 'first_Screen';
@@ -71,6 +74,45 @@ class FirstScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Sign Out',
+                    style: TextStyle(fontSize: 25, color: Colors.white),
+                  ),
+                ),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40)),
+              ),
+              RaisedButton(
+                onPressed: () async {
+                  //Navigator.pushNamed(context, ChatScreen.id);
+                  final BluetoothDevice selectedDevice =
+                      await Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return SelectBondedDevicePage(checkAvailability: false);
+                      },
+                    ),
+                  );
+
+                  if (selectedDevice != null) {
+                    print('Connect -> selected ' + selectedDevice.address);
+                    //_startChat(context, selectedDevice);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          print(selectedDevice);
+                          return ChoosePlayer(server: selectedDevice);
+                        },
+                      ),
+                    );
+                  } else {
+                    print('Connect -> no device selected');
+                  }
+                },
+                color: Colors.deepPurple,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Connect to master',
                     style: TextStyle(fontSize: 25, color: Colors.white),
                   ),
                 ),

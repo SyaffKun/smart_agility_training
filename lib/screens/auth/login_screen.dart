@@ -2,18 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:smart_agility_training/components/rounded_button.dart';
+import 'package:smart_agility_training/constants.dart';
 import 'package:smart_agility_training/screens/first_screen.dart';
 
-import '../constants.dart';
-
-class RegistrationScreen extends StatefulWidget {
-  static const String id = 'registration_Screen';
-
+class LoginScreen extends StatefulWidget {
+  static const String id = 'login_screen';
   @override
-  _RegistrationScreenState createState() => _RegistrationScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
   bool showSpinner = false;
   String email;
@@ -66,16 +64,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 24.0,
               ),
               RounndedButton(
-                title: 'Register',
-                colour: Colors.blueAccent,
+                title: 'Log In',
+                colour: Colors.lightBlueAccent,
                 onPressed: () async {
                   setState(() {
                     showSpinner = true;
                   });
+                  final user = await _auth.signInWithEmailAndPassword(
+                      email: email, password: password);
                   try {
-                    final newuser = await _auth.createUserWithEmailAndPassword(
-                        email: email, password: password);
-                    if (newuser != null) {
+                    if (user != null) {
                       Navigator.pushNamed(context, FirstScreen.id);
                     }
                     setState(() {

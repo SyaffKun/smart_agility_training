@@ -1,10 +1,10 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_agility_training/backend/sign_in.dart';
+import 'package:smart_agility_training/backend/google_sign_in.dart';
 import 'package:smart_agility_training/components/rounded_button.dart';
 import 'first_screen.dart';
-import 'login_screen.dart';
-import 'registration_screen.dart';
+import 'package:smart_agility_training/screens/auth/login_screen.dart';
+import 'package:smart_agility_training/screens/auth/registration_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome_screen';

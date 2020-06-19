@@ -1,35 +1,21 @@
-import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:smart_agility_training/components/rounded_button.dart';
+import 'package:smart_agility_training/screens/first_screen.dart';
 import 'package:smart_agility_training/constants.dart';
 
-import 'first_screen.dart';
-
-class LoginScreen extends StatefulWidget {
-  static const String id = 'login_screen';
-
+class RegistrationScreen extends StatefulWidget {
+  static const String id = 'registration_Screen';
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegistrationScreenState createState() => _RegistrationScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  Timer _discoverableTimeoutTimer;
-
+class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
   bool showSpinner = false;
   String email;
   String password;
-
-  @override
-  void dispose() {
-    FlutterBluetoothSerial.instance.setPairingRequestHandler(null);
-    _discoverableTimeoutTimer?.cancel();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,38 +64,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 24.0,
               ),
               RounndedButton(
-                title: 'Log In',
-                colour: Colors.lightBlueAccent,
+                title: 'Register',
+                colour: Colors.blueAccent,
                 onPressed: () async {
                   setState(() {
                     showSpinner = true;
                   });
-                  final user = await _auth.signInWithEmailAndPassword(
-                      email: email, password: password);
                   try {
-                    if (user != null) {
-                      // //Navigator.pushNamed(context, ChatScreen.id);
-                      // final BluetoothDevice selectedDevice =
-                      //     await Navigator.of(context).push(
-                      //   MaterialPageRoute(
-                      //     builder: (context) {
-                      //       return SelectBondedDevicePage(
-                      //           checkAvailability: false);
-                      //     },
-                      //   ),
-                      // );
-
-                      // if (selectedDevice != null) {
-                      //   print('Connect -> selected ' + selectedDevice.address);
-                      //   _startChat(context, selectedDevice);
-                      // } else {
-                      //   print('Connect -> no device selected');
-                      // }
+                    final newuser = await _auth.createUserWithEmailAndPassword(
+                        email: email, password: password);
+                    if (newuser != null) {
                       Navigator.pushNamed(context, FirstScreen.id);
                     }
                     setState(() {
                       showSpinner = false;
-
                     });
                   } catch (e) {
                     print(e);
@@ -122,15 +90,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
-  // void _startChat(BuildContext context, BluetoothDevice server) {
-  //   Navigator.of(context).push(
-  //     MaterialPageRoute(
-  //       builder: (context) {
-  //         print(server);
-  //         return ChoosePlayer(server: server);
-  //       },
-  //     ),
-  //   );
-  // }
 }
