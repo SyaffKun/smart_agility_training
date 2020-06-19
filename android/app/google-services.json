@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "406180918702",
+    "firebase_url": "https://smart-agility-training-5bee7.firebaseio.com",
+    "project_id": "smart-agility-training-5bee7",
+    "storage_bucket": "smart-agility-training-5bee7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:406180918702:android:1cb198f2f3ac3d74b5c43f",
+        "android_client_info": {
+          "package_name": "com.syaff.smart_agility_training"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "406180918702-7biu0hpkg5c6rg3mp98sshbpbm2cbbq0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1YkBv_85bQcye27_AGpyEBM-6Z9DiLiQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "406180918702-7biu0hpkg5c6rg3mp98sshbpbm2cbbq0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
